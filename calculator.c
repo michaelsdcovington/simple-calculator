@@ -1,6 +1,6 @@
 #include <stdio.h>
 
-int GetDoubleInput(char *prompt){
+double GetDoubleInput(char *prompt){
     double num;
     while(1){
         printf("%s", prompt);
@@ -10,8 +10,8 @@ int GetDoubleInput(char *prompt){
 
             continue;
         }
-        break;
         return num;
+        break;
     }
 
 }
@@ -21,7 +21,7 @@ int main(void){
     double num2;
     double total;
     char operand;
-    char again;
+    char again = 'y';
 
     while(again != 'n'){
         num1 = GetDoubleInput("Enter the first number: ");
@@ -43,19 +43,20 @@ int main(void){
 
             case '/':
             if(num2 == 0){
-                printf("Error: Divide by Zero");
-                return 1;
+                printf("Error: Divide by Zero\n");
+                continue;
             }
             total = num1 / num2;
             break;
 
             default:
             printf("Invalid operand. ");
-            break;
             return 1;
+            break;
         }
         printf("Total is: %lf\n", total);
         printf("Calculate again? (y/n): ");
+        scanf(" %c", &again);
     }
     return 0;
 }
