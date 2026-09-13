@@ -1,5 +1,21 @@
 #include <stdio.h>
 
+int GetDoubleInput(char *prompt){
+    double num;
+    while(1){
+        printf("%s", prompt);
+        if(scanf("%lf", &num) != 1){
+            printf("Invalid input\n");
+            while(getchar() != '\n');
+
+            continue;
+        }
+        break;
+        return num;
+    }
+
+}
+
 int main(void){
     double num1;
     double num2;
@@ -8,10 +24,8 @@ int main(void){
     char again;
 
     while(again != 'n'){
-        printf("Enter the first number: ");
-        scanf("%lf", &num1);
-        printf("Enter the second number: ");
-        scanf("%lf", &num2);
+        num1 = GetDoubleInput("Enter the first number: ");
+        num2 = GetDoubleInput("Enter the second number: ");
         printf("Enter the operand(+, -, *, /): ");
         scanf(" %c", &operand);
         switch(operand){
@@ -42,7 +56,6 @@ int main(void){
         }
         printf("Total is: %lf\n", total);
         printf("Calculate again? (y/n): ");
-        scanf(" %c", &again);
     }
     return 0;
 }
