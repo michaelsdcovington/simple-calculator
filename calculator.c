@@ -15,8 +15,9 @@ double GetDoubleInput(char *prompt){
 
 }
 
-double Calculate(double num1, double num2, char operand){
+double Calculate(double num1, double num2, char operand, int *success){
     double total = 0;
+    *success = 1;
     switch(operand){
         case '+':
         total = num1 + num2;
@@ -33,6 +34,7 @@ double Calculate(double num1, double num2, char operand){
         case '/':
         if(num2 == 0){
             printf("Error: Divide by Zero\n");
+            *success = 0;
             break;
         }
 
@@ -41,7 +43,7 @@ double Calculate(double num1, double num2, char operand){
 
         default:
         printf("Invalid operand. ");
-        return 1;
+        *success = 0;
     }
     return total;
 }
@@ -54,14 +56,16 @@ int main(void){
     char again = 'y';
 
     while(again != 'n'){
+        int isGood;
         num1 = GetDoubleInput("Enter the first number: ");
         num2 = GetDoubleInput("Enter the second number: ");
         printf("Enter the operand(+, -, *, /): ");
         scanf(" %c", &operand);
 
-        total = Calculate(num1, num2, operand);
-
-        printf("Total is: %lf\n", total);
+        total = Calculate(num1, num2, operand, &isGood);
+        if(isGood == 1){
+            printf("Total is: %lf\n", total);
+        }
         printf("Calculate again? (y/n): ");
         scanf(" %c", &again);
     }
