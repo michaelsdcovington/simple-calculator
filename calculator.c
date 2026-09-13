@@ -11,9 +11,39 @@ double GetDoubleInput(char *prompt){
             continue;
         }
         return num;
-        break;
     }
 
+}
+
+double Calculate(double num1, double num2, char operand){
+    double total = 0;
+    switch(operand){
+        case '+':
+        total = num1 + num2;
+        break;
+
+        case '-':
+        total = num1 - num2;
+        break;
+
+        case '*':
+        total = num1 * num2;
+        break;
+
+        case '/':
+        if(num2 == 0){
+            printf("Error: Divide by Zero\n");
+            break;
+        }
+
+        total = num1 / num2;
+        break;
+
+        default:
+        printf("Invalid operand. ");
+        return 1;
+    }
+    return total;
 }
 
 int main(void){
@@ -28,32 +58,9 @@ int main(void){
         num2 = GetDoubleInput("Enter the second number: ");
         printf("Enter the operand(+, -, *, /): ");
         scanf(" %c", &operand);
-        switch(operand){
-            case '+':
-            total = num1 + num2;
-            break;
 
-            case '-':
-            total = num1 - num2;
-            break;
+        total = Calculate(num1, num2, operand);
 
-            case '*':
-            total = num1 * num2;
-            break;
-
-            case '/':
-            if(num2 == 0){
-                printf("Error: Divide by Zero\n");
-                continue;
-            }
-            total = num1 / num2;
-            break;
-
-            default:
-            printf("Invalid operand. ");
-            return 1;
-            break;
-        }
         printf("Total is: %lf\n", total);
         printf("Calculate again? (y/n): ");
         scanf(" %c", &again);
